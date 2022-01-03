@@ -5,7 +5,16 @@
     <h1>ชื่อ-นามสกุล : {{ getFullName() }}</h1>
     <h1>อายุ : {{ age }} ปี</h1>
     <p>ที่อยู่ : <span v-html="address"></span></p>
-    <a :href="social" target="_blank">facebook</a>
+    <p>โซเชียลมีเดีย : <a :href="social" target="_blank">facebook</a></p>
+    <p>งานอดิเรก :</p>
+    <ul>
+      <li v-for="(item, index) in hobby" :key="index">{{ item }}</li>
+    </ul>
+    <p>ข้อมูลพื้นฐาน :</p>
+    <ul>
+      <li v-for="(item, key) in general" :key="key">{{ key }} : {{ item }}</li>
+    </ul>
+    <button @click="showData">ข้อมูลเพิ่มเติม</button>
   </section>
 </template>
 
@@ -20,12 +29,22 @@ export default {
       address: "<strong>หาดใหญ่</strong>",
       picture: "https://cdn-icons-png.flaticon.com/512/5815/5815726.png",
       size: 200,
-      social : "https://www.facebook.com/t.yotanan"
+      social: "https://www.facebook.com/t.yotanan",
+      hobby: ["เล่นเกมส์", "เล่นกีต้าร์", "เขียนโค้ด"],
+      general: {
+        gender: "ชาย",
+        weight: 90,
+        height: 170.5,
+        status: false,
+      },
     };
   },
   methods: {
     getFullName() {
       return this.firstname + " " + this.lastname;
+    },
+    showData() {
+      alert(`${this.firstname} ${this.lastname}`);
     },
   },
 };
@@ -36,7 +55,7 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  /* text-align: center; */
   color: #2c3e50;
   margin-top: 60px;
 }
