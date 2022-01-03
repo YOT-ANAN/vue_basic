@@ -1,8 +1,11 @@
 <template>
   <section>
     <img v-bind:src="picture" v-bind:width="size" :height="size" />
-    <!-- สามารถเขียน v-bind โดยใช้ : แทน -->
+    <br />
+    ป้อนชื่อเล่น : <input type="text" v-on:input="setNickname" />
+    <!-- bind attribute สามารถเขียน v-bind โดยใช้ : แทน -->
     <h1>ชื่อ-นามสกุล : {{ getFullName() }}</h1>
+    <h1>ชื่อเล่น: {{ nickname }}</h1>
     <h1>อายุ : {{ age }} ปี</h1>
     <p>ที่อยู่ : <span v-html="address"></span></p>
     <p>โซเชียลมีเดีย : <a :href="social" target="_blank">facebook</a></p>
@@ -18,7 +21,7 @@
     <button v-on:click="increment">เพิ่ม</button>
     <button v-on:click="incrementByValue(10)">เพิ่มทีละ 10</button>
 
-    <!-- สามารถเขียน v-on หรือลดรูปโดยใช้@ -->
+    <!-- event สามารถเขียน v-on หรือลดรูปโดยใช้@ -->
   </section>
 </template>
 
@@ -29,6 +32,7 @@ export default {
     return {
       firstname: "Yot-anan",
       lastname: "Tioasakun",
+      nickname: "",
       age: 23,
       address: "<strong>หาดใหญ่</strong>",
       picture: "https://cdn-icons-png.flaticon.com/512/5815/5815726.png",
@@ -54,7 +58,11 @@ export default {
       this.age++;
     },
     incrementByValue(value) {
-      this.age+=value;
+      this.age += value;
+    },
+    setNickname(event) {
+      console.log(event.target.value);
+      this.nickname = event.target.value;
     },
   },
 };
