@@ -15,6 +15,10 @@
       <li v-for="(item, key) in general" :key="key">{{ key }} : {{ item }}</li>
     </ul>
     <button @click="showData">ข้อมูลเพิ่มเติม</button>
+    <button v-on:click="increment">เพิ่ม</button>
+    <button v-on:click="incrementByValue(10)">เพิ่มทีละ 10</button>
+
+    <!-- สามารถเขียน v-on หรือลดรูปโดยใช้@ -->
   </section>
 </template>
 
@@ -45,6 +49,12 @@ export default {
     },
     showData() {
       alert(`${this.firstname} ${this.lastname}`);
+    },
+    increment() {
+      this.age++;
+    },
+    incrementByValue(value) {
+      this.age+=value;
     },
   },
 };
