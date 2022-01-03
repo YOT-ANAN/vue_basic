@@ -1,9 +1,10 @@
 <template>
   <section>
     <img v-bind:src="picture" v-bind:width="size" :height="size" />
+    <!-- bind attribute สามารถเขียน v-bind โดยใช้ : แทน -->
     <br />
     ป้อนชื่อเล่น : <input type="text" v-on:input="setNickname" />
-    <!-- bind attribute สามารถเขียน v-bind โดยใช้ : แทน -->
+    <!-- evnet input โดยใช้ v-on -->
     <h1>ชื่อ-นามสกุล : {{ getFullName() }}</h1>
     <h1>ชื่อเล่น: {{ nickname }}</h1>
     <h1>อายุ : {{ age }} ปี</h1>
