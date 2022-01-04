@@ -20,7 +20,7 @@
     </ul>
     <button @click="showData">ข้อมูลเพิ่มเติม</button>
     <button v-on:click="increment">เพิ่ม</button>
-    <button v-on:click="incrementByValue(10)">เพิ่มทีละ 10</button>
+    <button v-on:click.right="incrementByValue(10)">เพิ่มทีละ 10</button>
 
     <!-- event สามารถเขียน v-on หรือลดรูปโดยใช้@ -->
   </section>
