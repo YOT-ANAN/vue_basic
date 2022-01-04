@@ -1,9 +1,19 @@
 <template>
   <section>
-    <img v-bind:src="picture" v-bind:width="size" :height="size" />
+    <img
+      v-bind:src="picture"
+      v-bind:width="size"
+      :height="size"
+      ref="imageEl"
+    />
     <!-- bind attribute สามารถเขียน v-bind โดยใช้ : แทน -->
     <br />
-    ป้อนชื่อเล่น : <input type="text" v-on:input="setNickname" />
+    <form @submit.prevent="submitForm">
+      ป้อนชื่อเล่น :
+      <!-- <input type="text" v-on:input="setNickname" ref="nicknameEl" /> -->
+      <input type="text" ref="nicknameEl" />
+      <button type="submit">บันทึก</button>
+    </form>
     <!-- evnet input โดยใช้ v-on -->
     <h1>ชื่อ-นามสกุล : {{ getFullName() }}</h1>
     <h1>ชื่อเล่น: {{ nickname }}</h1>
@@ -21,7 +31,6 @@
     <button @click="showData">ข้อมูลเพิ่มเติม</button>
     <button v-on:click="increment">เพิ่ม</button>
     <button v-on:click.right="incrementByValue(10)">เพิ่มทีละ 10</button>
-
     <!-- event สามารถเขียน v-on หรือลดรูปโดยใช้@ -->
   </section>
 </template>
@@ -64,6 +73,10 @@ export default {
     setNickname(event) {
       console.log(event.target.value);
       this.nickname = event.target.value;
+    },
+    submitForm() {
+      console.log(this.$refs.nicknameEl);
+      this.nickname = this.$refs.nicknameEl.value;
     },
   },
 };
