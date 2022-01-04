@@ -1,4 +1,6 @@
 <template>
+  <FormComponent />
+  <ListData :employees=employees />
   <section>
     <img
       v-bind:src="picture"
@@ -61,8 +63,14 @@
   </section>
 </template>
 <script>
+import ListData from "./components/ListData.vue";
+import FormComponent from "./components/FormComponent.vue";
 export default {
   name: "App",
+  components: {
+    ListData,
+    FormComponent,
+  },
   data() {
     return {
       firstname: "Yot-anan",
@@ -82,6 +90,16 @@ export default {
       },
       isVisible: false,
       salary: 40000,
+      employees: [
+        {
+          name: "ก้อง",
+          salary: 40000,
+        },
+        {
+          name: "ยศ",
+          salary: 45000,
+        },
+      ],
     };
   },
   methods: {
@@ -130,9 +148,9 @@ export default {
     salary(value) {
       if (value > 50000) {
         alert("เงินเดือนไม่ควรเกิน 50000");
-        setTimeout(()=>{
+        setTimeout(() => {
           this.salary = 20000;
-        },100)
+        }, 100);
       }
     },
   },
