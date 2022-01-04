@@ -15,9 +15,20 @@
       <button type="submit">บันทึก</button>
     </form>
     <!-- event input โดยใช้ v-on -->
-    <h1>ชื่อ-นามสกุล : {{ getFullName() }}</h1>
+    <h1>ชื่อ-นามสกุล : {{ getFullName }}</h1>
     <h1>ชื่อเล่น: {{ nickname }}</h1>
     <h1>อายุ : {{ age }} ปี</h1>
+    <div>เงินเดือน : {{ salary }}</div>
+    <div>รายได้ต่อปี : {{ getIncome }}</div>
+    <div>ตำแหน่งงงาน : {{ getDepartmnet }}</div>
+    <div>Method : {{ getRandomByMethod() }}</div>
+    <div>Method : {{ getRandomByMethod() }}</div>
+    <hr />
+    <div>Computed : {{ getRandomByComputed }}</div>
+    <div>Computed : {{ getRandomByComputed }}</div>
+    <div>
+      <button @click="addSalary(5000)">เพิ่มเงินเดือน</button>
+    </div>
     <div>
       <button @click="toggleVisible">
         {{ isVisible ? "ซ่อน" : "แสดงข้อมูลทั้งหมด" }}แสดงข้อมูลทั้งหมด
@@ -49,7 +60,6 @@
     </div>
   </section>
 </template>
-
 <script>
 export default {
   name: "App",
@@ -71,12 +81,10 @@ export default {
         status: false,
       },
       isVisible: false,
+      salary: 40000,
     };
   },
   methods: {
-    getFullName() {
-      return this.firstname + " " + this.lastname;
-    },
     showData() {
       alert(`${this.firstname} ${this.lastname}`);
     },
@@ -96,6 +104,36 @@ export default {
     },
     toggleVisible() {
       this.isVisible = !this.isVisible;
+    },
+    getRandomByMethod() {
+      return Math.random();
+    },
+    addSalary(value) {
+      this.salary += value;
+    },
+  },
+  computed: {
+    getFullName() {
+      return this.firstname + " " + this.lastname;
+    },
+    getRandomByComputed() {
+      return Math.random();
+    },
+    getIncome() {
+      return this.salary * 12;
+    },
+    getDepartmnet() {
+      return this.salary > 35000 ? "Project Manager" : "Programer";
+    },
+  },
+  watch: {
+    salary(value) {
+      if (value > 50000) {
+        alert("เงินเดือนไม่ควรเกิน 50000");
+        setTimeout(()=>{
+          this.salary = 20000;
+        },100)
+      }
     },
   },
 };
