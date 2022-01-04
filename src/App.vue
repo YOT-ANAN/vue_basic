@@ -14,24 +14,39 @@
       <input type="text" ref="nicknameEl" />
       <button type="submit">บันทึก</button>
     </form>
-    <!-- evnet input โดยใช้ v-on -->
+    <!-- event input โดยใช้ v-on -->
     <h1>ชื่อ-นามสกุล : {{ getFullName() }}</h1>
     <h1>ชื่อเล่น: {{ nickname }}</h1>
     <h1>อายุ : {{ age }} ปี</h1>
-    <p>ที่อยู่ : <span v-html="address"></span></p>
-    <p>โซเชียลมีเดีย : <a :href="social" target="_blank">facebook</a></p>
-    <p>งานอดิเรก :</p>
-    <ul>
-      <li v-for="(item, index) in hobby" :key="index">{{ item }}</li>
-    </ul>
-    <p>ข้อมูลพื้นฐาน :</p>
-    <ul>
-      <li v-for="(item, key) in general" :key="key">{{ key }} : {{ item }}</li>
-    </ul>
-    <button @click="showData">ข้อมูลเพิ่มเติม</button>
-    <button v-on:click="increment">เพิ่ม</button>
-    <button v-on:click.right="incrementByValue(10)">เพิ่มทีละ 10</button>
-    <!-- event สามารถเขียน v-on หรือลดรูปโดยใช้@ -->
+    <div>
+      <button @click="toggleVisible">
+        {{ isVisible ? "ซ่อน" : "แสดงข้อมูลทั้งหมด" }}แสดงข้อมูลทั้งหมด
+      </button>
+    </div>
+    <div v-show="isVisible === true">
+      <p>ที่อยู่ : <span v-html="address"></span></p>
+      <p>โซเชียลมีเดีย : <a :href="social" target="_blank">facebook</a></p>
+      <p>งานอดิเรก :</p>
+      <div v-if="hobby.length === 0">
+        <p>ไม่มีงานอดิเรก</p>
+      </div>
+      <div v-else>
+        <ul>
+          <li v-for="(item, index) in hobby" :key="index">{{ item }}</li>
+        </ul>
+      </div>
+
+      <p>ข้อมูลพื้นฐาน :</p>
+      <ul>
+        <li v-for="(item, key) in general" :key="key">
+          {{ key }} : {{ item }}
+        </li>
+      </ul>
+      <button @click="showData">ข้อมูลเพิ่มเติม</button>
+      <button v-on:click="increment">เพิ่ม</button>
+      <button v-on:click.right="incrementByValue(10)">เพิ่มทีละ 10</button>
+      <!-- event สามารถเขียน v-on หรือลดรูปโดยใช้@ -->
+    </div>
   </section>
 </template>
 
@@ -48,13 +63,14 @@ export default {
       picture: "https://cdn-icons-png.flaticon.com/512/5815/5815726.png",
       size: 200,
       social: "https://www.facebook.com/t.yotanan",
-      hobby: ["เล่นเกมส์", "เล่นกีต้าร์", "เขียนโค้ด"],
+      hobby: ["เล่นเกมส์", "เล่นกีต้าร์", "เขียนโค้ด", "อ่านหนังสือ"],
       general: {
         gender: "ชาย",
         weight: 90,
         height: 170.5,
         status: false,
       },
+      isVisible: false,
     };
   },
   methods: {
@@ -77,6 +93,9 @@ export default {
     submitForm() {
       console.log(this.$refs.nicknameEl);
       this.nickname = this.$refs.nicknameEl.value;
+    },
+    toggleVisible() {
+      this.isVisible = !this.isVisible;
     },
   },
 };
