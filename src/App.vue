@@ -1,6 +1,10 @@
 <template>
   <FormComponent />
-  <ListData :employees=employees />
+  <section class="employee-content">
+    <h2>ข้อมูลพนักงาน</h2>
+    <ListData />
+  </section>
+
   <section>
     <img
       v-bind:src="picture"
@@ -90,16 +94,6 @@ export default {
       },
       isVisible: false,
       salary: 40000,
-      employees: [
-        {
-          name: "ก้อง",
-          salary: 40000,
-        },
-        {
-          name: "ยศ",
-          salary: 45000,
-        },
-      ],
     };
   },
   methods: {
